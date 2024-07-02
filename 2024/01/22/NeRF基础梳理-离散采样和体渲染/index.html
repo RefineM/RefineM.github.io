@@ -1,0 +1,568 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    
+    <head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport" />
+    <meta name="description" content="NeRF基础梳理-离散采样和体渲染" />
+    <meta name="hexo-theme-A4" content="v1.9.0" />
+    <link rel="alternate icon" type="image/webp" href="/img/favicon.webp">
+    <title>追求源于热爱</title>
+
+    
+        
+<link rel="stylesheet" href="/css/highlight/style1.css">
+
+        
+<link rel="stylesheet" href="/css/reset.css">
+
+        
+<link rel="stylesheet" href="/css/markdown.css">
+
+        
+<link rel="stylesheet" href="/css/fonts.css">
+ 
+         <!--注意：首页既不是post也不是page-->
+        
+        
+        
+<link rel="stylesheet" href="/css/ui.css">
+ 
+        
+<link rel="stylesheet" href="/css/style.css">
+
+
+        
+            <!--返回顶部css-->
+            
+<link rel="stylesheet" href="/css/returnToTop.css">
+
+            
+<link rel="stylesheet" href="/css/unicons.css">
+
+        
+        
+            <!--目录-->
+            
+<link rel="stylesheet" href="/css/toc.css">
+
+        
+    
+
+    
+        
+<link rel="stylesheet" href="/css/returnToLastPage.css">
+
+    
+    
+   
+<link rel="stylesheet" href="/css/lightgallery.min.css">
+
+
+<meta name="generator" content="Hexo 7.3.0"></head>
+    
+    <style>
+        :root {
+            --waline-theme-color: #9e5345; 
+            --waline-color: #9e5345; 
+            --waline-border-color: #9e5345; 
+            --waline-white: #9e5345; 
+            --waline-bgcolor-light: #efeae2;  
+        }
+        body {
+            color: #9e5345;
+            background: #e8e0c9;
+        }
+        .post-md code {
+            background: #e8e0c9;
+            color: #2e5041; 
+        }
+        .post-md pre, .post-md .highlight {
+            background: #e8e0c9;
+            color: #2e5041; 
+        }
+        pre .string, pre .value, pre .inheritance, pre .header, pre .ruby .symbol, pre .xml .cdata {
+            color: #9e5345;
+        }
+        pre .number, pre .preprocessor, pre .built_in, pre .literal, pre .params, pre .constant {
+            color: #9e5345;
+        }
+        .year-font-color {
+            color: #9e5345 !important;
+        }
+        .wl-card span.wl-nick {
+            color: #9e5345; 
+        }
+        .wl-card .wl-badge {
+            border: 1px solid #9e5345;
+            color: #9e5345; 
+        }
+        .wl-btn {
+            border: 1px solid #9e5345; 
+            color:  #9e5345;  
+        }
+        .wl-btn.primary {
+            color: #efeae2; 
+        }
+        .wl-header label {
+            color: #9e5345;
+        }
+        a {
+            color: #2e5041;
+        }
+
+        .post-md a {
+            color: #2e5041;
+        }
+
+        .nav li a {
+            color: #2e5041;
+        }
+
+        .archive-main a:link {
+            color: #2e5041;
+        }
+        .archive-main a:visited {
+            color: #9c9caf; 
+        }
+
+        .archive li span {
+            color: #9e5345;
+        }
+
+        .post-main-title {
+            color: #9e5345;
+        }
+
+        .post-md h1,
+        .post-md h2,
+        .post-md h3,
+        .post-md h4,
+        .post-md h5,
+        .post-md h6 {
+            color: #9e5345;
+        }
+
+        [data-waline] p {
+            color: #9e5345;
+        }
+        [data-waline] a {
+            color: #9e5345;
+        } 
+        .wl-sort li.active {
+            color: #9e5345;
+        }
+
+        .wl-card .wl-meta>span {
+            background: #efeae2;
+        }
+
+        .paper {
+            background: #e8e0c9;
+        }
+
+        .index-main {
+            background: #efeae2;
+        }
+
+        .paper-main {
+            background: #efeae2;
+        }
+
+        .wl-panel {
+            background: #efeae2;
+        }
+
+        .archive li:nth-child(odd) {
+            background: #efeae2;
+            ;
+        }
+
+        .archive li:nth-child(even) {
+            background: #efeae2;
+        }
+
+        .post-md table tr:nth-child(odd) td {
+            background: #efeae2;
+        }
+
+        .post-md table tr:nth-child(even) td {
+            background: #efeae2;
+        }
+
+    
+        .progress-wrap::after {
+            color: #9e5345; /* 箭头的颜色 */
+        }
+        .progress-wrap svg.progress-circle path {
+	        stroke: #9e5345; /* 边框的颜色 */
+        }
+        .progress-wrap::before {
+	        background-image: linear-gradient(298deg, #2e5041, #2e5041); /* 鼠标滑过的箭头颜色 */
+         }
+
+        .return-to-last-progress-wrap::after {
+            color: #9e5345; /* 箭头的颜色 */
+        }
+        .return-to-last-progress-wrap svg.progress-circle path {
+	        stroke: #9e5345; /* 边框的颜色 */
+        }
+        .return-to-last-progress-wrap::before {
+	        background-image: linear-gradient(298deg, #2e5041, #2e5041); /* 鼠标滑过的箭头颜色 */
+         }
+
+         .left-toc-container::-webkit-scrollbar-thumb {
+            background-color: #9e5345; /* 设置滚动条拖动块的颜色 */
+        }
+
+        .bs-docs-sidebar .nav>.active>a,
+        .bs-docs-sidebar .nav>li>a:hover,
+        .bs-docs-sidebar .nav>li>a:focus {
+            color: #2e5041;
+            border-left-color: #2e5041;
+        }
+        .bs-docs-sidebar .nav>li>a {
+            color:  #9e5345;
+        }
+    </style>
+
+    
+    
+    <body>
+        <script src="/js/darkmode-js.min.js"></script>
+        
+        <script>
+            const options = {
+                bottom: '53px', // default: '32px'
+                right: 'unset', // default: '32px'
+                left: '42px', // default: 'unset'
+                time: '0.3s', // default: '0.3s'
+                mixColor: '#fff', // default: '#fff'
+                backgroundColor: ' #e8e0c9  ',  // default: '#fff'
+                buttonColorDark: '#100f2c',  // default: '#100f2c'
+                buttonColorLight: '#fff', // default: '#fff'
+                saveInCookies: true, // default: true,
+                label: '🌓', // default: ''
+                autoMatchOsTheme: true // default: true
+            }
+            const darkmode = new Darkmode(options);
+            darkmode.showWidget();
+        </script>
+        
+        
+            <div class="left-toc-container">
+                <nav id="toc" class="bs-docs-sidebar"></nav>
+            </div>
+        
+        <div class="paper">
+            
+            
+            
+            
+                <div class="shadow-drop-2-bottom paper-main">
+                    
+
+
+<div class="header">
+    <div class="header-container">
+        <img style="
+        width: 56px;
+        height: auto;" alt="^-^" cache-control="max-age=86400" class="header-img" src="/img/favicon.webp" width="10%"></img>
+        <div class="header-content">
+            <a class="logo" href="/">追求源于热爱</a> 
+            <span class="description"></span> 
+        </div>
+        
+    </div>
+    
+   
+    <ul class="nav">
+        
+            
+                <li><a href="/">首页</a></li>
+            
+        
+            
+                <li><a href="/list/">文章</a></li>
+            
+        
+            
+                <li><a href="/tags/">标签</a></li>
+            
+        
+    </ul>
+</div> 
+        
+                    
+                    
+
+                    
+                    
+                    
+                    <!--说明是文章post页面-->
+                    
+                        <div class="post-main">
+
+    
+        <div class="post-main-title">
+            NeRF基础梳理-离散采样和体渲染
+        </div>
+      
+    
+
+    <div class="post-md">
+        
+            
+                <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E9%87%87%E6%A0%B7"><span class="post-toc-text">采样</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#%E9%87%87%E6%A0%B7%E5%85%89%E7%BA%BF%E3%80%81%E9%87%87%E6%A0%B7%E7%82%B9%E7%9A%84%E7%A1%AE%E5%AE%9A"><span class="post-toc-text">采样光线、采样点的确定</span></a></li></ol></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E6%B8%B2%E6%9F%93"><span class="post-toc-text">渲染</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#%E6%9D%83%E9%87%8D-weight-%E3%80%81%E9%80%8F%E6%98%8E%E5%BA%A6-alpha-%E3%80%81%E4%B8%8D%E9%80%8F%E6%98%8E%E5%BA%A6-opacity"><span class="post-toc-text">权重(weight)、透明度(alpha)、不透明度(opacity)</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#%E8%AE%AD%E7%BB%83%E5%92%8C%E9%AA%8C%E8%AF%81%E8%BF%87%E7%A8%8B%E7%9A%84%E6%B8%B2%E6%9F%93"><span class="post-toc-text">训练和验证过程的渲染</span></a></li></ol></li></ol></li></ol>
+            
+        
+        <link rel="stylesheet" type="text/css" href="https://jsd.onmicrosoft.cn/npm/hexo-theme-a4@latest/source/css/lightgallery.min.css" /><div class=".article-gallery"><h2 id="采样"><a href="#采样" class="headerlink" title="采样"></a>采样</h2><h4 id="采样光线、采样点的确定"><a href="#采样光线、采样点的确定" class="headerlink" title="采样光线、采样点的确定"></a>采样光线、采样点的确定</h4><ul>
+<li><p>从相机出发的光线，是一条射线，可以表示成：</p>
+<div>
+$$
+p = o+td
+$$
+</div>
+其中，o是相机中心在世界坐标系的坐标，d是相机在世界坐标系的朝向，t是采样编号。
+
+<p>在nerf中，需要<strong>随机选取一部分</strong>从<strong>相机发出并且穿过像素</strong>的光线进行渲染。</p>
+<p>因此，利用相机的内参、外参，获取采样光线的流程为：</p>
+<ul>
+<li><p>利用内外参矩阵，首先计算像片上每个像素点对应的世界坐标<code>Pi</code></p>
+</li>
+<li><p>利用外参矩阵，计算相机中心的世界坐标<code>Pcam</code>，即光线起点<code>center</code></p>
+</li>
+<li><p>求像素世界点到相机世界点的向量<code>Pi-Pcam</code>，经过归一化得到该相机穿过该像素点的光线朝向<code>ray_unit</code></p>
+</li>
+<li><p>在像片上的<code>H*W</code>个像素中，随机抽取<code>rays_num</code>个，穿过这些像素的光线即这张像片的采样光线</p>
+</li>
+</ul>
+</li>
+</ul>
+<p>​	至此就确定了光线的起点和方向。下面看光线上采样点的位置，也就是t该如何确定。</p>
+<ul>
+<li><p>首先确定采样范围，即确定near和far平面。</p>
+<ul>
+<li><p>一般将场景放在一个球体内。球体的球心即场景的中心，也就是世界坐标系的原点。球体的半径即场景的半径。</p>
+<blockquote>
+<p>注意，一般默认这个球体的半径为1，也就是说要把主要场景缩放到球体之内。需要更改json文件中的场景包围盒、相机的世界坐标（中心化、归一化）。</p>
+</blockquote>
+</li>
+<li><p>将相机发出的光线和这个球体求交，从而获得近点、远点两个交点，在这之间的部分按照object采样，之外的部分按照background采样。</p>
+<blockquote>
+<p>遵循的是nerf++的策略，前景和背景分别用一个MLP，从而把无限远处的采样点反球面参数化到有限空间。如果是提取SDF，前景和背景分别采用表面渲染和体积渲染；如果不需要，则均进行体积渲染。</p>
+</blockquote>
+</li>
+</ul>
+</li>
+<li><p>然后由不同采样方式获取采样点的t。</p>
+</li>
+<li><p>之后计算采样点世界坐标，后续就将其编码，再输入MLP。</p>
+</li>
+</ul>
+<h2 id="渲染"><a href="#渲染" class="headerlink" title="渲染"></a>渲染</h2><h4 id="权重-weight-、透明度-alpha-、不透明度-opacity"><a href="#权重-weight-、透明度-alpha-、不透明度-opacity" class="headerlink" title="权重(weight)、透明度(alpha)、不透明度(opacity)"></a>权重(weight)、透明度(alpha)、不透明度(opacity)</h4><ul>
+<li><p>alpha：当前粒子的透明度</p>
+<ul>
+<li>提取object的表面,用<code>sdf</code>计算</li>
+<li>background用<code>density</code>计算</li>
+</ul>
+</li>
+<li><p>visibility: 当前粒子的可见性，就是光线穿过之前的粒子到达该粒子的概率（透过率）</p>
+<div>
+$$
+T_i = \prod^{i-1}_{j=1}(1-\alpha_j)
+$$
+</div>
+</li>
+<li><p>weight:  当前粒子的权重，就是当前粒子的颜色能够多大程度地决定最终像素的颜色</p>
+<div>
+$$
+w_i = T_i * \alpha_i \\
+$$
+</div>
+</li>
+<li><p>opacity:  最终像素的不透明度，就是采样光线上所有粒子的权重之和</p>
+</li>
+</ul>
+<h4 id="训练和验证过程的渲染"><a href="#训练和验证过程的渲染" class="headerlink" title="训练和验证过程的渲染"></a>训练和验证过程的渲染</h4><p>nerf只能对某一个场景进行过拟合，针对不同场景只能分别训练。一般把全部数据作为训练集，从中挑选出一部分像片作为所谓的验证集，在训练一定轮次后验证渲染效果。</p>
+<ul>
+<li><p>训练过程，对象是<strong>采样光线穿过的像素</strong>。</p>
+<ul>
+<li><p>首先根据1中流程，获取采样光线的起点<code>center</code>和相机朝向<code>ray_unit</code>。</p>
+</li>
+<li><p>采样光线和中心球求交，获取采样点的范围<code>near,far</code></p>
+</li>
+<li><p>利用前景和背景MLP，分别计算前景<code>object</code>和背景<code>background</code>所有采样点的色彩<code>rgbs</code>和透明度<code>alphas</code></p>
+<ul>
+<li>前景使用sdf计算透明度，背景使用density计算透明度</li>
+</ul>
+</li>
+<li><p>利用体渲染公式，综合前景和背景，求出采样光线穿过的像素最终的颜色<code>rgb</code></p>
+  <div>
+$$
+C(o,d)=\sum^{N}_{i=1}\omega_ic_i=\sum^{N}_{i=1}T_i\alpha_ic_i
+$$
+</div>
+</li>
+<li><p>输出：(加s是指单个采样点，不加s指的是整条采样光线)</p>
+<ul>
+<li><p>用来计算渲染loss、sdf一阶梯度loss、sdf二阶梯度loss:</p>
+<p><code>rgbs, gradients, hessians</code></p>
+</li>
+<li><p>用来进行从粗到细的优化，指导下一次采样：</p>
+<p><code>dists , weights</code></p>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>验证过程，对象是<strong>验证集每一张像片上的所有像素</strong>。</p>
+<ul>
+<li>根据1中流程，获取穿过像片上所有像素的光线起点<code>center</code>和相机朝向<code>ray_unit</code>。</li>
+<li>获取每条光线上每个采样点的 <code>rgbs, gradients, hessians, dists, weights</code>。</li>
+<li>计算每条采样光线的 <code>rgb, gradient, dist, depth, opacity</code>。<ul>
+<li>rgb &#x3D; sum( rgbs )</li>
+<li>gradient &#x3D; sum( gradient * weight)</li>
+<li>dist &#x3D; sum(dists * weight)</li>
+<li>depth &#x3D; dist &#x2F; norm(ray)</li>
+<li>opacity &#x3D; sum(weights)</li>
+</ul>
+</li>
+<li>整合生成map（将像素由展开状态还原成H*W）：<ul>
+<li>rgb_map</li>
+<li>depth_map</li>
+<li>opacity_map</li>
+<li>normal_map：需要把normal( &#x3D; - gradient ) 由世界坐标系转为相机坐标系</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<script>MathJax = {  tex: {    inlineMath: [['$', '$'], ['\\(', '\\)']]  }};</script><script id="MathJax-script" async  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+</div><script src="https://jsd.onmicrosoft.cn/npm/hexo-theme-a4@latest/source/js/lightgallery.min.js"></script><script>if("undefined"!=typeof lightGallery) {
+        var options1 = {
+            selector: '.gallery-item'
+        };
+        lightGallery(document.getElementsByClassName('.article-gallery')[0], options1);
+        }</script>
+    </div>
+
+    <div class="post-meta">
+        <i>
+        
+            <span>2024-01-22</span>
+            
+                <span>该篇文章被 RefineM</span>
+            
+            
+                <span>打上标签:
+                    
+                    
+                        <a href='/tags/NeRF%E5%9F%BA%E7%A1%80%E6%A2%B3%E7%90%86/'>
+                            NeRF基础梳理
+                        </a>
+                    
+                </span>
+             
+             
+        
+        </i>
+    </div>
+    <br>
+    
+    <!-- <div class="post-footer-pre-next">
+        <span>上一篇：<a href=""></a></span>
+        <span class="post-footer-pre-next-last-span-right">上一篇：<a href=""></a></span>
+    </div> -->
+
+    
+        
+
+     
+</div>
+
+
+
+                                      
+                    
+                    
+                    <div class="footer">
+    
+        <span> 
+            © 2002-2024 China 
+
+            
+                
+
+            
+        </span>
+    
+</div>
+<!--这是指一条线往下的内容-->
+<div class="footer-last">
+    
+            <span>日拱一卒 功不唐捐</span>
+            
+                <span class="footer-last-span-right"><i>本站由<a target="_blank" rel="noopener" href="https://hexo.io/zh-cn/index.html">Hexo</a>驱动｜使用<a target="_blank" rel="noopener" href="https://github.com/HiNinoJay/hexo-theme-A4">Hexo-theme-A4</a>主题</i></span>
+            
+    
+</div>
+
+
+    
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+
+    <!--目录-->
+    
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.7.2/jquery.min.js" type="text/javascript" ></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js" type="text/javascript" ></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.tocify/1.9.0/javascripts/jquery.tocify.min.js" type="text/javascript" ></script>
+        
+<script src="/js/toc.js"></script>
+
+    
+
+    
+<script src="/js/randomHeaderContent.js"></script>
+
+    <!--回到顶部按钮-->
+    
+        
+<script src="/js/returnToTop.js"></script>
+
+    
+
+    
+        
+<script src="/js/returnToLastPage.js"></script>
+
+    
+
+
+
+
+
+<script src="/js/lightgallery.min.js"></script>
+
+
+
+                </div>
+            
+            
+                <!-- 回到顶部的按钮-->  
+                <div class="progress-wrap shadow-drop-2-bottom">
+                    <svg class="progress-circle svg-content" width="100%" height="100%" viewBox="-1 -1 102 102">
+                        <path d="M50,1 a49,49 0 0,1 0,98 a49,49 0 0,1 0,-98"/>
+                    </svg>
+                </div>
+            
+            
+                <!-- 返回的按钮-->  
+                <div class="return-to-last-progress-wrap shadow-drop-2-bottom">
+                    <svg class="progress-circle svg-content" width="100%" height="100%" viewBox="-1 -1 102 102">
+                        <path d="M50,1 a49,49 0 0,1 0,98 a49,49 0 0,1 0,-98"/>
+                    </svg>
+                </div>
+            
+    </body>
+</html>
