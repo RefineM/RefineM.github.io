@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html lang="en">
+    
+    <head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport" />
+    <meta name="description" content="深度学习系列 - 初学者常会遇到的问题" />
+    <meta name="hexo-theme-A4" content="v2.0.0" />
+    <link rel="alternate icon" type="image/webp" href="/img/favicon.webp">
+    <title>边陲</title>
+
+    
+        
+<link rel="stylesheet" href="/css/highlight/style1.css">
+
+        
+<link rel="stylesheet" href="/css/reset.css">
+
+        
+<link rel="stylesheet" href="/css/markdown.css">
+
+        
+<link rel="stylesheet" href="/css/fonts.css">
+ 
+         <!--注意：首页既不是post也不是page-->
+        
+        
+        
+<link rel="stylesheet" href="/css/ui.css">
+ 
+        
+<link rel="stylesheet" href="/css/style.css">
+
+
+        
+            <!--返回顶部css-->
+            
+<link rel="stylesheet" href="/css/returnToTop.css">
+
+            
+<link rel="stylesheet" href="/css/unicons.css">
+
+        
+        
+            <!--目录-->
+            
+<link rel="stylesheet" href="/css/toc.css">
+
+        
+    
+
+    
+        
+<link rel="stylesheet" href="/css/returnToLastPage.css">
+
+    
+    
+   
+<link rel="stylesheet" href="/css/lightgallery-bundle.min.css">
+
+
+   
+        
+<link rel="stylesheet" href="/css/custom.css">
+
+    
+    <link rel='stylesheet' href='https://chinese-fonts-cdn.deno.dev/packages/lxgwwenkai/dist/LXGWWenKai-Regular/result.css' /> 
+<meta name="generator" content="Hexo 8.1.1"></head>
+    
+    
+
+    
+    
+
+
+
+    
+
+    
+    
+
+
+
+
+    
+    
+
+
+    <body>
+        <script src="/js/darkmode-js.min.js"></script>
+        
+        <script>
+            const options = {
+                bottom: '40px', // default: '32px'
+                right: 'unset', // default: '32px'
+                left: '42px', // default: 'unset'
+                time: '0.3s', // default: '0.3s'
+                mixColor: '#fff', // default: '#fff'
+                backgroundColor: ' #e4e4e4 ',  // default: '#fff'
+                buttonColorDark: '#100f2c',  // default: '#100f2c'
+                buttonColorLight: '#fff', // default: '#fff'
+                saveInCookies: true, // default: true,
+                label: '🌓', // default: ''
+                autoMatchOsTheme: true // default: true
+            }
+            const darkmode = new Darkmode(options);
+            darkmode.showWidget();
+        </script>
+        
+        
+            
+                <div class="left-toc-container">
+                    <nav id="toc" class="bs-docs-sidebar"></nav>
+                </div>
+            
+        
+        <div class="paper">
+
+            
+
+            
+                <div class="shadow-drop-2-bottom paper-main">
+                    
+
+
+<div class="header">
+    <div class="header-container">
+        <style>
+            .header-img {
+                width: 56px;
+                height: auto;
+                object-fit: cover; /* 保持图片比例 */
+                transition: transform 0.3s ease-in-out; 
+                border-radius: 0; 
+            }
+            
+        </style>
+        <img 
+            alt="^-^" 
+            cache-control="max-age=86400" 
+            class="header-img" 
+            src="/img/favicon.webp" 
+        />
+        <div class="header-content">
+            <a class="logo" href="/">边陲</a> 
+            <span class="description"></span> 
+        </div>
+    </div>
+    
+   
+    <ul class="nav">
+        
+            
+                <li><a href="/">首页</a></li>
+            
+        
+            
+                <li><a href="/list/">文章</a></li>
+            
+        
+            
+                <li><a href="/about/">关于</a></li>
+            
+        
+            
+                <li><a href="/tags/">标签</a></li>
+            
+        
+    </ul>
+</div>
+
+                    
+                    
+
+                    
+                    
+
+                    <!--说明是文章post页面-->
+                    
+                        <div class="post-main">
+    
+
+    
+        
+            
+                <div class="post-main-title" style="text-align: center;">
+                    深度学习系列 - 初学者常会遇到的问题
+                </div>
+            
+        
+      
+    
+
+    
+
+        
+            <div class="post-head-meta-center">
+        
+                
+                    <span>最近更新：2025-11-06</span> 
+                
+                
+                    
+                        &nbsp; | &nbsp;
+                    
+                     <span>字数总计：535</span>
+                
+                
+                    
+                        &nbsp; | &nbsp;
+                    
+                    <span>阅读估时：2分钟</span>
+                
+                
+                    
+                        &nbsp; | &nbsp;
+                    
+                    <span id="busuanzi_container_page_pv">
+                        阅读量：<span id="busuanzi_value_page_pv"></span>次
+                    </span>
+                
+            </div>
+    
+
+    <div class="post-md">
+        
+            
+                <ol class="post-toc"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#1-%E8%AE%AD%E7%BB%83%E7%BD%91%E7%BB%9C%E6%97%B6Loss%E4%B8%BANan"><span class="post-toc-text">1. 训练网络时Loss为Nan</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#2%EF%BC%9A%E6%95%B0%E6%8D%AE%E9%A2%84%E5%A4%84%E7%90%86%E6%97%B6%E7%9A%84%E5%BD%92%E4%B8%80%E5%8C%96%E5%92%8C%E6%A0%87%E5%87%86%E5%8C%96"><span class="post-toc-text">2：数据预处理时的归一化和标准化</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#3%EF%BC%9Aout-of-memory"><span class="post-toc-text">3：out of memory</span></a></li></ol>
+            
+        
+        <div class=".article-gallery"><h4 id="1-训练网络时Loss为Nan"><a href="#1-训练网络时Loss为Nan" class="headerlink" title="1. 训练网络时Loss为Nan"></a>1. 训练网络时Loss为Nan</h4><ul>
+<li><p>Nan是啥？<br>Nan , 也就是“not a number”，是用数学无法表示出来的数。</p>
+</li>
+<li><p>Nan为什么会产生？</p>
+<ul>
+<li>第一类：无穷大的数据之间做运算，产生Nan。<br>不同的数据类型有不同的数值范围,如果某个值超出了这个范围，就会返回inf（无穷大）.<br>产生inf的情况：<br>（1）2&#x2F;0<br>如果后续存在下面的运算，就会返回Nan：<br>（1）0&#x2F;0<br>（2）inf&#x2F;inf  </li>
+<li>第二类：输入的自变量不满足函数定义域。<br>一些函数对于定义域有要求，输入的自变量x如果不在要求的定义域内，函数的值就无法计算，自然就会返回Nan.<br>比如log(x)要求x&gt;0.</li>
+</ul>
+</li>
+<li><p>在图像分类情境下：</p>
+<ul>
+<li>输入的图片和标签有异常值或者缺失值<ul>
+<li>用np.isnan() </li>
+<li>或者运用nan !&#x3D; nan的性质</li>
+</ul>
+</li>
+<li>在做归一化时0做除数<ul>
+<li>在分母处加一个eps（如&#x3D;1e-3） </li>
+<li>或者直接除以255</li>
+</ul>
+</li>
+<li>使用半精度(float16)训练，从float32到float16存在舍入误差，可能导致log（x）的x舍为0<ul>
+<li>使用混合精度（amp）以及损失缩放（gradScaler）</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p>参考：<br><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/456113139">https://zhuanlan.zhihu.com/p/456113139</a><br><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/622964137">https://zhuanlan.zhihu.com/p/622964137</a>  </p>
+<h4 id="2：数据预处理时的归一化和标准化"><a href="#2：数据预处理时的归一化和标准化" class="headerlink" title="2：数据预处理时的归一化和标准化"></a>2：数据预处理时的归一化和标准化</h4><ul>
+<li><p>归一化目的是让模型更快更好的收敛 。由于链式法则的累积效应，过大&#x2F;过小的梯度会导致爆炸或弥散。<br>梯度是和输入值是有关的，因此要将输入值维护在一个不大不小的区间。有【0，1】和【-1，1】两种。</p>
+</li>
+<li><p>对于图像，除以255即可。</p>
+</li>
+<li><p>一般在ReLU函数前加上BatchNorm层，将一个batch的数据进行0均值、1方差的标准化，才能充分利用ReLU&#x3D;max(x,0)特性。</p>
+</li>
+</ul>
+<p>参考：<br><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_44138265/article/details/117677973">https://blog.csdn.net/weixin_44138265/article/details/117677973</a><br><a target="_blank" rel="noopener" href="https://www.zhihu.com/question/307748349">https://www.zhihu.com/question/307748349</a></p>
+<h4 id="3：out-of-memory"><a href="#3：out-of-memory" class="headerlink" title="3：out of memory"></a>3：out of memory</h4><ul>
+<li>显存溢出的解决方法：  <ul>
+<li>减小batchsize，使用梯度累积</li>
+<li>减小网络</li>
+<li>使用半精度训练</li>
+<li>检查loss计算是否正确loss+&#x3D;loss.item()  </li>
+<li>检查验证部分是否被torch.no_grad()包裹</li>
+</ul>
+</li>
+</ul>
+</div>
+    </div>
+
+    <div class="post-meta">
+        <i>
+        
+            <span>2023-12-10</span>
+            
+                <span>该篇文章被 Junfan W</span>
+            
+            
+                <span>打上标签:
+                    
+                    
+                        <a href='/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/'>
+                            深度学习
+                        </a>
+                    
+                </span>
+             
+             
+        
+        </i>
+    </div>
+    <br>
+    
+    
+        
+            
+    
+            <div class="post-footer-pre-next">
+                
+                    <span>上一篇：<a href='/2025/01/10/%5B%E4%B8%80%E5%8A%B3%E6%B0%B8%E9%85%8D%E7%B3%BB%E5%88%97%5D%E5%9C%A8%E6%9C%8D%E5%8A%A1%E5%99%A8%E4%B8%8A%E9%85%8D%E7%BD%AE%E4%B8%AA%E4%BA%BA%E7%94%A8%E6%88%B7%E7%9B%AE%E5%BD%95%E4%B8%8B%E7%9A%84conda%E7%8E%AF%E5%A2%83/'>一劳永配系列 - 在服务器上配置个人用户目录下的conda环境</a></span>
+                
+
+                
+            </div>
+    
+        
+    
+
+    
+        
+
+     
+</div>
+
+
+
+
+                    
+
+                    <div class="footer">
+    
+        <span> 
+            © RefineM (Junfan Wang) 
+
+            
+                
+
+            
+        </span>
+       
+    
+</div>
+
+
+
+<!--这是指一条线往下的内容-->
+<div class="footer-last">
+    
+            <span>🌊 曾记否 中流击水 浪遏飞舟 🌊</span>
+            
+                <span class="footer-last-span-right"><i>本站由<a target="_blank" rel="noopener" href="https://hexo.io/zh-cn/index.html">Hexo</a>驱动｜使用<a target="_blank" rel="noopener" href="https://github.com/HiNinoJay/hexo-theme-A4">Hexo-theme-A4</a>主题</i></span>
+            
+    
+</div>
+
+
+    
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+
+    <!--目录-->
+    
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.7.2/jquery.min.js" type="text/javascript" ></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js" type="text/javascript" ></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.tocify/1.9.0/javascripts/jquery.tocify.min.js" type="text/javascript" ></script>
+        
+<script src="/js/toc.js"></script>
+
+    
+
+    
+<script src="/js/randomHeaderContent.js"></script>
+
+    <!--回到顶部按钮-->
+    
+        
+<script src="/js/returnToTop.js"></script>
+
+    
+
+    
+        
+<script src="/js/returnToLastPage.js"></script>
+
+    
+
+
+
+
+
+<script src="/js/lightgallery/lightgallery.umd.min.js"></script>
+
+
+
+<script src="/js/lightgallery/plugins/lg-thumbnail.umd.min.js"></script>
+
+
+
+<script src="/js/lightgallery/plugins/lg-fullscreen.umd.min.js"></script>
+
+
+<script src="/js/lightgallery/plugins/lg-autoplay.umd.min.js"></script>
+
+
+<script src="/js/lightgallery/plugins/lg-zoom.umd.min.js"></script>
+
+
+<script src="/js/lightgallery/plugins/lg-rotate.umd.min.js"></script>
+
+
+<script src="/js/lightgallery/plugins/lg-paper.umd.min.js"></script>
+
+
+
+
+<script type="text/javascript">
+     
+    if (typeof lightGallery !== "undefined") {
+        var options1 = {
+            selector: '.gallery-item',
+            plugins: [lgThumbnail, lgFullscreen, lgAutoplay, lgZoom, lgRotate, lgPager], // 启用插件
+            thumbnail: true,          // 显示缩略图
+            zoom: true,               // 启用缩放功
+            rotate: true,             // 启用旋转功能能
+            autoplay: true,        // 启用自动播放功能
+            fullScreen: true,      // 启用全屏功能
+            pager: false, //页码,
+            zoomFromOrigin: true,   // 从原始位置缩放
+            actualSize: true,       // 启用查看实际大小的功能
+            enableZoomAfter: 300,    // 延迟缩放，确保图片加载完成后可缩放
+        };
+        lightGallery(document.getElementsByClassName('.article-gallery')[0], options1); // 修复选择器
+    }
+    
+</script>
+
+
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script> 
+
+                </div>
+            
+            
+                <!-- 回到顶部的按钮-->
+                <div class="progress-wrap shadow-drop-2-bottom">
+                    <svg class="progress-circle svg-content" width="100%" height="100%" viewBox="-1 -1 102 102">
+                        <path d="M50,1 a49,49 0 0,1 0,98 a49,49 0 0,1 0,-98"/>
+                    </svg>
+                </div>
+            
+            
+                <!-- 返回的按钮-->
+                <div class="return-to-last-progress-wrap shadow-drop-2-bottom">
+                    <svg class="progress-circle svg-content" width="100%" height="100%" viewBox="-1 -1 102 102">
+                        <path d="M50,1 a49,49 0 0,1 0,98 a49,49 0 0,1 0,-98"/>
+                    </svg>
+                </div>
+            
+    </body>
+</html>
+<script src="/js/emojiHandler.js"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        wrapEmojis('.paper');
+    });
+</script>

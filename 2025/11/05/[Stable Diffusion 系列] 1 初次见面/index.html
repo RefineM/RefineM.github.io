@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="en">
+    
+    <head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport" />
+    <meta name="description" content="Stable Diffusion 系列 - 1 初次见面" />
+    <meta name="hexo-theme-A4" content="v2.0.0" />
+    <link rel="alternate icon" type="image/webp" href="/img/favicon.webp">
+    <title>边陲</title>
+
+    
+        
+<link rel="stylesheet" href="/css/highlight/style1.css">
+
+        
+<link rel="stylesheet" href="/css/reset.css">
+
+        
+<link rel="stylesheet" href="/css/markdown.css">
+
+        
+<link rel="stylesheet" href="/css/fonts.css">
+ 
+         <!--注意：首页既不是post也不是page-->
+        
+        
+        
+<link rel="stylesheet" href="/css/ui.css">
+ 
+        
+<link rel="stylesheet" href="/css/style.css">
+
+
+        
+            <!--返回顶部css-->
+            
+<link rel="stylesheet" href="/css/returnToTop.css">
+
+            
+<link rel="stylesheet" href="/css/unicons.css">
+
+        
+        
+            <!--目录-->
+            
+<link rel="stylesheet" href="/css/toc.css">
+
+        
+    
+
+    
+        
+<link rel="stylesheet" href="/css/returnToLastPage.css">
+
+    
+    
+   
+<link rel="stylesheet" href="/css/lightgallery-bundle.min.css">
+
+
+   
+        
+<link rel="stylesheet" href="/css/custom.css">
+
+    
+    <link rel='stylesheet' href='https://chinese-fonts-cdn.deno.dev/packages/lxgwwenkai/dist/LXGWWenKai-Regular/result.css' /> 
+<meta name="generator" content="Hexo 8.1.1"></head>
+    
+    
+
+    
+    
+
+
+
+    
+
+    
+    
+
+
+
+
+    
+    
+
+
+    <body>
+        <script src="/js/darkmode-js.min.js"></script>
+        
+        <script>
+            const options = {
+                bottom: '40px', // default: '32px'
+                right: 'unset', // default: '32px'
+                left: '42px', // default: 'unset'
+                time: '0.3s', // default: '0.3s'
+                mixColor: '#fff', // default: '#fff'
+                backgroundColor: ' #e4e4e4 ',  // default: '#fff'
+                buttonColorDark: '#100f2c',  // default: '#100f2c'
+                buttonColorLight: '#fff', // default: '#fff'
+                saveInCookies: true, // default: true,
+                label: '🌓', // default: ''
+                autoMatchOsTheme: true // default: true
+            }
+            const darkmode = new Darkmode(options);
+            darkmode.showWidget();
+        </script>
+        
+        
+            
+                <div class="left-toc-container">
+                    <nav id="toc" class="bs-docs-sidebar"></nav>
+                </div>
+            
+        
+        <div class="paper">
+
+            
+
+            
+                <div class="shadow-drop-2-bottom paper-main">
+                    
+
+
+<div class="header">
+    <div class="header-container">
+        <style>
+            .header-img {
+                width: 56px;
+                height: auto;
+                object-fit: cover; /* 保持图片比例 */
+                transition: transform 0.3s ease-in-out; 
+                border-radius: 0; 
+            }
+            
+        </style>
+        <img 
+            alt="^-^" 
+            cache-control="max-age=86400" 
+            class="header-img" 
+            src="/img/favicon.webp" 
+        />
+        <div class="header-content">
+            <a class="logo" href="/">边陲</a> 
+            <span class="description"></span> 
+        </div>
+    </div>
+    
+   
+    <ul class="nav">
+        
+            
+                <li><a href="/">首页</a></li>
+            
+        
+            
+                <li><a href="/list/">文章</a></li>
+            
+        
+            
+                <li><a href="/about/">关于</a></li>
+            
+        
+            
+                <li><a href="/tags/">标签</a></li>
+            
+        
+    </ul>
+</div>
+
+                    
+                    
+
+                    
+                    
+
+                    <!--说明是文章post页面-->
+                    
+                        <div class="post-main">
+    
+
+    
+        
+            
+                <div class="post-main-title" style="text-align: center;">
+                    Stable Diffusion 系列 - 1 初次见面
+                </div>
+            
+        
+      
+    
+
+    
+
+        
+            <div class="post-head-meta-center">
+        
+                
+                    <span>最近更新：2025-11-06</span> 
+                
+                
+                    
+                        &nbsp; | &nbsp;
+                    
+                     <span>字数总计：784</span>
+                
+                
+                    
+                        &nbsp; | &nbsp;
+                    
+                    <span>阅读估时：2分钟</span>
+                
+                
+                    
+                        &nbsp; | &nbsp;
+                    
+                    <span id="busuanzi_container_page_pv">
+                        阅读量：<span id="busuanzi_value_page_pv"></span>次
+                    </span>
+                
+            </div>
+    
+
+    <div class="post-md">
+        
+            
+                <ol class="post-toc"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#%E6%80%BB%E4%BD%93%E6%A1%86%E6%9E%B6%EF%BC%9A"><span class="post-toc-text">总体框架：</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#%E6%96%87%E6%9C%AC%EF%BC%9A"><span class="post-toc-text">文本：</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#%E5%BD%B1%E5%83%8F%EF%BC%9A"><span class="post-toc-text">影像：</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#%E8%AE%AD%E7%BB%83%EF%BC%9A"><span class="post-toc-text">训练：</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#%E5%B0%8F%E7%BB%93%EF%BC%9A"><span class="post-toc-text">小结：</span></a></li></ol></li></ol>
+            
+        
+        <div class=".article-gallery"><p>最近在看Difix3D（近期NVIDIA一个去除3DGS&#x2F;NERF噪声的工作，是基于sd微调的），正好借此契机学习下SD的概念和原理。</p>
+<h4 id="总体框架："><a href="#总体框架：" class="headerlink" title="总体框架："></a>总体框架：</h4><p>将影像组织成向量，首先通过VAE的编码器预测一个高斯分布的均值和方差，将影像向量压缩为维度更低的、包含高斯噪声的潜空间变量z。U-Net网络在文本等condition的指导下，紧接着从潜变量z中预测其中的噪声ε。然后通过多步采样去噪得到纯净的变量z_0。VAE的解码器再将其恢复到原始影像的维度大小，得到生成影像。</p>
+<h4 id="文本："><a href="#文本：" class="headerlink" title="文本："></a>文本：</h4><p><code>text</code> –(tokenizer)–&gt; <code>tokens</code> –(text_encoder)–&gt; <code>vectors</code></p>
+<ul>
+<li><p>text先经过tokenizer, 转为token</p>
+<p>token: 文本拆分成字符，然后通过查询词表，将字符映射为整数id</p>
+</li>
+<li><p>然后经过text_encoder (CLIP), 转为语义向量</p>
+<p>tokens → 词嵌入+位置编码 → 多层Transformer Encoder → 每个词的embedding</p>
+<ul>
+<li>词嵌入：一个可训练的查表矩阵，把每个词映射到一个高纬度向量上。矩阵的大小是（词表大小*每个词的嵌入维度）。</li>
+<li>位置编码：将每个词在句子之中的位置做标记。</li>
+</ul>
+</li>
+<li><p>输出的文本向量，会输入U-net引导去噪过程。</p>
+</li>
+</ul>
+<h5 id="影像："><a href="#影像：" class="headerlink" title="影像："></a>影像：</h5><p><code>images_vec</code> –(vae-encoder)–&gt; <code>latent_vec z</code> –(u-net)–&gt; <code>noise_vec</code> –(vae-decoder)-&gt; <code>images_vec</code></p>
+<ul>
+<li><p>VAE-encoder：将高维的影像向量压缩到低维的潜空间，并且加入高斯噪声。它预测的不是一个确定的值，而是一个高斯分布的<strong>均值和方差</strong>。然后从这个分布中<strong>采样</strong>，得到加有高斯噪声之后的latent向量z：<br>$$<br>z &#x3D; μ + σ * ε， ε ~ N(0, I)<br>$$<br>为什么预测分布：应该是让模型学习到分布，而不是某一些特定的输入数据，否则不具有生成能力。</p>
+</li>
+<li><p>u-net: 从加噪声后的变量z中估计出噪声。这个过程通过交叉注意力机制将文本条件相结合。在u-net预测出噪声之后，还需要通过多步的还原得到干净的潜变量。重复去噪过程，直到时间步为0.</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">step=t</span><br><span class="line">z = VAE-encoder(x)</span><br><span class="line">noise = U-net(z, t, condition)</span><br><span class="line">while t &gt; 0:</span><br><span class="line">	z_&#123;t-1&#125; = (z_t - β_t * ε_θ) / sqrt(α_t) + disturb </span><br><span class="line">	t = t -1</span><br></pre></td></tr></table></figure></li>
+<li><p>VAE-decoder: 将潜向量还原成原图大小的影像。</p>
+</li>
+</ul>
+<h5 id="训练："><a href="#训练：" class="headerlink" title="训练："></a>训练：</h5><p>Difix的训练过程使用sd-turbo的预训练模型初始化。冻结：tokenizer、text-encoder、VAE-encoder。激活：u-net(去噪)、VAE-decoder、以及从encoder到decoder的skip-connection.</p>
+<h5 id="小结："><a href="#小结：" class="headerlink" title="小结："></a>小结：</h5><ol>
+<li>去噪过程仅仅和<strong>U-net+调度器</strong>有关, 条件信息注入的地方也是U-net。</li>
+<li>VAE编码器只是负责<strong>把影像压缩到潜空间</strong>，是<strong>一次加噪</strong>过程，和去噪过程无关；也不同于diffusion模型的<strong>逐步加噪</strong>过程。</li>
+<li>为什么stable-diffusion要采用VAE：就是要把扩散过程<strong>从像素空间转到潜空间</strong>。直接在像素空间操作，计算量极大。</li>
+<li>对于特定的下游任务一般<strong>使用lora微调VAE-decoder</strong>，因为decoder对于<strong>潜空间-生成影像的影响最大</strong>。</li>
+</ol>
+</div>
+    </div>
+
+    <div class="post-meta">
+        <i>
+        
+            <span>2025-11-05</span>
+            
+                <span>该篇文章被 Junfan W</span>
+            
+            
+                <span>打上标签:
+                    
+                    
+                        <a href='/tags/%E7%AE%97%E6%B3%95/'>
+                            算法
+                        </a>
+                    
+                </span>
+             
+             
+        
+        </i>
+    </div>
+    <br>
+    
+    
+        
+            
+    
+            <div class="post-footer-pre-next">
+                
+
+                
+                    <span class="post-footer-pre-next-last-span-right">下一篇：<a href="/2025/01/10/%5B%E4%B8%80%E5%8A%B3%E6%B0%B8%E9%85%8D%E7%B3%BB%E5%88%97%5D%E5%9C%A8%E6%9C%8D%E5%8A%A1%E5%99%A8%E4%B8%8A%E9%85%8D%E7%BD%AE%E4%B8%AA%E4%BA%BA%E7%94%A8%E6%88%B7%E7%9B%AE%E5%BD%95%E4%B8%8B%E7%9A%84conda%E7%8E%AF%E5%A2%83/">一劳永配系列 - 在服务器上配置个人用户目录下的conda环境</a>
+                    </span>
+                
+            </div>
+    
+        
+    
+
+    
+        
+
+     
+</div>
+
+
+
+
+                    
+
+                    <div class="footer">
+    
+        <span> 
+            © RefineM (Junfan Wang) 
+
+            
+                
+
+            
+        </span>
+       
+    
+</div>
+
+
+
+<!--这是指一条线往下的内容-->
+<div class="footer-last">
+    
+            <span>🌊 曾记否 中流击水 浪遏飞舟 🌊</span>
+            
+                <span class="footer-last-span-right"><i>本站由<a target="_blank" rel="noopener" href="https://hexo.io/zh-cn/index.html">Hexo</a>驱动｜使用<a target="_blank" rel="noopener" href="https://github.com/HiNinoJay/hexo-theme-A4">Hexo-theme-A4</a>主题</i></span>
+            
+    
+</div>
+
+
+    
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+
+    <!--目录-->
+    
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.7.2/jquery.min.js" type="text/javascript" ></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js" type="text/javascript" ></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.tocify/1.9.0/javascripts/jquery.tocify.min.js" type="text/javascript" ></script>
+        
+<script src="/js/toc.js"></script>
+
+    
+
+    
+<script src="/js/randomHeaderContent.js"></script>
+
+    <!--回到顶部按钮-->
+    
+        
+<script src="/js/returnToTop.js"></script>
+
+    
+
+    
+        
+<script src="/js/returnToLastPage.js"></script>
+
+    
+
+
+
+
+
+<script src="/js/lightgallery/lightgallery.umd.min.js"></script>
+
+
+
+<script src="/js/lightgallery/plugins/lg-thumbnail.umd.min.js"></script>
+
+
+
+<script src="/js/lightgallery/plugins/lg-fullscreen.umd.min.js"></script>
+
+
+<script src="/js/lightgallery/plugins/lg-autoplay.umd.min.js"></script>
+
+
+<script src="/js/lightgallery/plugins/lg-zoom.umd.min.js"></script>
+
+
+<script src="/js/lightgallery/plugins/lg-rotate.umd.min.js"></script>
+
+
+<script src="/js/lightgallery/plugins/lg-paper.umd.min.js"></script>
+
+
+
+
+<script type="text/javascript">
+     
+    if (typeof lightGallery !== "undefined") {
+        var options1 = {
+            selector: '.gallery-item',
+            plugins: [lgThumbnail, lgFullscreen, lgAutoplay, lgZoom, lgRotate, lgPager], // 启用插件
+            thumbnail: true,          // 显示缩略图
+            zoom: true,               // 启用缩放功
+            rotate: true,             // 启用旋转功能能
+            autoplay: true,        // 启用自动播放功能
+            fullScreen: true,      // 启用全屏功能
+            pager: false, //页码,
+            zoomFromOrigin: true,   // 从原始位置缩放
+            actualSize: true,       // 启用查看实际大小的功能
+            enableZoomAfter: 300,    // 延迟缩放，确保图片加载完成后可缩放
+        };
+        lightGallery(document.getElementsByClassName('.article-gallery')[0], options1); // 修复选择器
+    }
+    
+</script>
+
+
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script> 
+
+                </div>
+            
+            
+                <!-- 回到顶部的按钮-->
+                <div class="progress-wrap shadow-drop-2-bottom">
+                    <svg class="progress-circle svg-content" width="100%" height="100%" viewBox="-1 -1 102 102">
+                        <path d="M50,1 a49,49 0 0,1 0,98 a49,49 0 0,1 0,-98"/>
+                    </svg>
+                </div>
+            
+            
+                <!-- 返回的按钮-->
+                <div class="return-to-last-progress-wrap shadow-drop-2-bottom">
+                    <svg class="progress-circle svg-content" width="100%" height="100%" viewBox="-1 -1 102 102">
+                        <path d="M50,1 a49,49 0 0,1 0,98 a49,49 0 0,1 0,-98"/>
+                    </svg>
+                </div>
+            
+    </body>
+</html>
+<script src="/js/emojiHandler.js"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        wrapEmojis('.paper');
+    });
+</script>
