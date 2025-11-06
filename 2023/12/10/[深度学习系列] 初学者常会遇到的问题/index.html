@@ -6,7 +6,7 @@
     <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport" />
     <meta name="description" content="深度学习系列 - 初学者常会遇到的问题" />
     <meta name="hexo-theme-A4" content="v2.0.0" />
-    <link rel="alternate icon" type="image/webp" href="/img/favicon.webp">
+    <link rel="alternate icon" type="image/webp" href="/assets/icon.jpg">
     <title>边陲</title>
 
     
@@ -84,6 +84,23 @@
 
     
     
+    <style>
+        body {
+            background-image: url(/assets/01.jpg);
+            background-attachment: fixed;  /* 背景固定，不随页面滚动 */
+            background-repeat: no-repeat;  /* 防止背景图片重复 */
+            background-size: cover;       /* 背景自适应大小，覆盖整个背景 */
+            background-position: center;   /* 背景居中显示 */
+        }
+        .paper {
+            background-image: url(/assets/01.jpg);
+            background-attachment: fixed;  /* 背景固定，不随页面滚动 */
+            background-repeat: no-repeat;  /* 防止背景图片重复 */
+            background-size: cover;       /* 背景自适应大小，覆盖整个背景 */
+            background-position: center;   /* 背景居中显示 */
+        }  
+    </style>
+
 
 
     <body>
@@ -139,7 +156,7 @@
             alt="^-^" 
             cache-control="max-age=86400" 
             class="header-img" 
-            src="/img/favicon.webp" 
+            src="/assets/icon.jpg" 
         />
         <div class="header-content">
             <a class="logo" href="/">边陲</a> 
@@ -203,7 +220,7 @@
                     
                         &nbsp; | &nbsp;
                     
-                     <span>字数总计：535</span>
+                     <span>字数总计：532</span>
                 
                 
                     
@@ -225,10 +242,10 @@
     <div class="post-md">
         
             
-                <ol class="post-toc"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#1-%E8%AE%AD%E7%BB%83%E7%BD%91%E7%BB%9C%E6%97%B6Loss%E4%B8%BANan"><span class="post-toc-text">1. 训练网络时Loss为Nan</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#2%EF%BC%9A%E6%95%B0%E6%8D%AE%E9%A2%84%E5%A4%84%E7%90%86%E6%97%B6%E7%9A%84%E5%BD%92%E4%B8%80%E5%8C%96%E5%92%8C%E6%A0%87%E5%87%86%E5%8C%96"><span class="post-toc-text">2：数据预处理时的归一化和标准化</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#3%EF%BC%9Aout-of-memory"><span class="post-toc-text">3：out of memory</span></a></li></ol>
+                <ol class="post-toc"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#%E8%AE%AD%E7%BB%83%E7%BD%91%E7%BB%9C%E6%97%B6Loss%E4%B8%BANan"><span class="post-toc-text">训练网络时Loss为Nan</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#%E6%95%B0%E6%8D%AE%E9%A2%84%E5%A4%84%E7%90%86%E6%97%B6%E7%9A%84%E5%BD%92%E4%B8%80%E5%8C%96%E5%92%8C%E6%A0%87%E5%87%86%E5%8C%96"><span class="post-toc-text">数据预处理时的归一化和标准化</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#out-of-memory"><span class="post-toc-text">out of memory</span></a></li></ol>
             
         
-        <div class=".article-gallery"><h4 id="1-训练网络时Loss为Nan"><a href="#1-训练网络时Loss为Nan" class="headerlink" title="1. 训练网络时Loss为Nan"></a>1. 训练网络时Loss为Nan</h4><ul>
+        <div class=".article-gallery"><h4 id="训练网络时Loss为Nan"><a href="#训练网络时Loss为Nan" class="headerlink" title="训练网络时Loss为Nan"></a>训练网络时Loss为Nan</h4><ul>
 <li><p>Nan是啥？<br>Nan , 也就是“not a number”，是用数学无法表示出来的数。</p>
 </li>
 <li><p>Nan为什么会产生？</p>
@@ -257,7 +274,7 @@
 </li>
 </ul>
 <p>参考：<br><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/456113139">https://zhuanlan.zhihu.com/p/456113139</a><br><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/622964137">https://zhuanlan.zhihu.com/p/622964137</a>  </p>
-<h4 id="2：数据预处理时的归一化和标准化"><a href="#2：数据预处理时的归一化和标准化" class="headerlink" title="2：数据预处理时的归一化和标准化"></a>2：数据预处理时的归一化和标准化</h4><ul>
+<h4 id="数据预处理时的归一化和标准化"><a href="#数据预处理时的归一化和标准化" class="headerlink" title="数据预处理时的归一化和标准化"></a>数据预处理时的归一化和标准化</h4><ul>
 <li><p>归一化目的是让模型更快更好的收敛 。由于链式法则的累积效应，过大&#x2F;过小的梯度会导致爆炸或弥散。<br>梯度是和输入值是有关的，因此要将输入值维护在一个不大不小的区间。有【0，1】和【-1，1】两种。</p>
 </li>
 <li><p>对于图像，除以255即可。</p>
@@ -266,7 +283,7 @@
 </li>
 </ul>
 <p>参考：<br><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_44138265/article/details/117677973">https://blog.csdn.net/weixin_44138265/article/details/117677973</a><br><a target="_blank" rel="noopener" href="https://www.zhihu.com/question/307748349">https://www.zhihu.com/question/307748349</a></p>
-<h4 id="3：out-of-memory"><a href="#3：out-of-memory" class="headerlink" title="3：out of memory"></a>3：out of memory</h4><ul>
+<h4 id="out-of-memory"><a href="#out-of-memory" class="headerlink" title="out of memory"></a>out of memory</h4><ul>
 <li>显存溢出的解决方法：  <ul>
 <li>减小batchsize，使用梯度累积</li>
 <li>减小网络</li>
@@ -308,9 +325,12 @@
     
             <div class="post-footer-pre-next">
                 
-                    <span>上一篇：<a href='/2025/01/10/%5B%E4%B8%80%E5%8A%B3%E6%B0%B8%E9%85%8D%E7%B3%BB%E5%88%97%5D%E5%9C%A8%E6%9C%8D%E5%8A%A1%E5%99%A8%E4%B8%8A%E9%85%8D%E7%BD%AE%E4%B8%AA%E4%BA%BA%E7%94%A8%E6%88%B7%E7%9B%AE%E5%BD%95%E4%B8%8B%E7%9A%84conda%E7%8E%AF%E5%A2%83/'>一劳永配系列 - 在服务器上配置个人用户目录下的conda环境</a></span>
+                    <span>上一篇：<a href='/2024/04/11/%5B%E4%B8%80%E5%8A%B3%E6%B0%B8%E9%85%8D%E7%B3%BB%E5%88%97%5Dtinycudann%E7%BC%96%E8%AF%91%E9%97%AE%E9%A2%98%E5%8F%8A/'>一劳永配系列 - tinycudann的编译问题</a></span>
                 
 
+                
+                    <span class="post-footer-pre-next-last-span-right">下一篇：<a href="/2023/11/10/%5B%E7%A5%9E%E7%BB%8F%E8%A1%A8%E9%9D%A2%E9%87%8D%E5%BB%BA%5D%20NeuS%E5%92%8CAngelo/">神经表面重建 - NeuS和Neuralangelo</a>
+                    </span>
                 
             </div>
     

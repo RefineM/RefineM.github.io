@@ -6,7 +6,7 @@
     <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport" />
     <meta name="description" content="一劳永配系列 - 在服务器上配置个人用户目录下的conda环境" />
     <meta name="hexo-theme-A4" content="v2.0.0" />
-    <link rel="alternate icon" type="image/webp" href="/img/favicon.webp">
+    <link rel="alternate icon" type="image/webp" href="/assets/icon.jpg">
     <title>边陲</title>
 
     
@@ -84,6 +84,23 @@
 
     
     
+    <style>
+        body {
+            background-image: url(/assets/01.jpg);
+            background-attachment: fixed;  /* 背景固定，不随页面滚动 */
+            background-repeat: no-repeat;  /* 防止背景图片重复 */
+            background-size: cover;       /* 背景自适应大小，覆盖整个背景 */
+            background-position: center;   /* 背景居中显示 */
+        }
+        .paper {
+            background-image: url(/assets/01.jpg);
+            background-attachment: fixed;  /* 背景固定，不随页面滚动 */
+            background-repeat: no-repeat;  /* 防止背景图片重复 */
+            background-size: cover;       /* 背景自适应大小，覆盖整个背景 */
+            background-position: center;   /* 背景居中显示 */
+        }  
+    </style>
+
 
 
     <body>
@@ -139,7 +156,7 @@
             alt="^-^" 
             cache-control="max-age=86400" 
             class="header-img" 
-            src="/img/favicon.webp" 
+            src="/assets/icon.jpg" 
         />
         <div class="header-content">
             <a class="logo" href="/">边陲</a> 
@@ -203,7 +220,7 @@
                     
                         &nbsp; | &nbsp;
                     
-                     <span>字数总计：607</span>
+                     <span>字数总计：598</span>
                 
                 
                     
@@ -225,24 +242,24 @@
     <div class="post-md">
         
             
-                <ol class="post-toc"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#%E4%B8%80%E3%80%81%E5%AE%89%E8%A3%85%E7%B3%BB%E7%BB%9F%E7%BA%A7%E4%BE%9D%E8%B5%96%E5%88%B0usr-bin%E4%B8%8B"><span class="post-toc-text">一、安装系统级依赖到usr&#x2F;bin下</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#%E4%BA%8C%E3%80%81%E5%AE%89%E8%A3%85miniconda%E5%88%B0%E7%94%A8%E6%88%B7%E6%96%87%E4%BB%B6%E5%A4%B9home-user-name%E4%B8%8B"><span class="post-toc-text">二、安装miniconda到用户文件夹home&#x2F;user_name下</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#%E4%B8%89%E3%80%81%E5%88%9B%E5%BB%BA%E8%99%9A%E6%8B%9F%E7%8E%AF%E5%A2%83%E5%B9%B6%E5%AE%89%E8%A3%85%E6%89%80%E9%9C%80pkg"><span class="post-toc-text">三、创建虚拟环境并安装所需pkg</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#1-%E5%88%9B%E5%BB%BA%E5%B9%B6%E8%BF%9B%E5%85%A5%E8%99%9A%E6%8B%9F%E7%8E%AF%E5%A2%83"><span class="post-toc-text">1 创建并进入虚拟环境</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#2-%E5%A6%82%E6%9E%9C%E9%A1%B9%E7%9B%AE%E5%AF%B9cmake%E7%89%88%E6%9C%AC%E6%9C%89%E8%A6%81%E6%B1%82%EF%BC%8C%E5%9C%A8%E8%99%9A%E6%8B%9F%E7%8E%AF%E5%A2%83%E4%B8%AD%E5%AE%89%E8%A3%85cmake"><span class="post-toc-text">2 如果项目对cmake版本有要求，在虚拟环境中安装cmake</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#3-%E5%A6%82%E6%9E%9C%E9%A1%B9%E7%9B%AE%E5%AF%B9cuda%E7%89%88%E6%9C%AC%E6%9C%89%E8%A6%81%E6%B1%82%EF%BC%8C%E5%9C%A8%E8%99%9A%E6%8B%9F%E7%8E%AF%E5%A2%83%E4%B8%AD%E5%AE%89%E8%A3%85CUDA"><span class="post-toc-text">3 如果项目对cuda版本有要求，在虚拟环境中安装CUDA</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#4-%E5%A6%82%E6%9E%9C%E9%A1%B9%E7%9B%AE%E5%AF%B9gcc%E7%89%88%E6%9C%AC%E6%9C%89%E8%A6%81%E6%B1%82%EF%BC%8C%E5%9C%A8%E8%99%9A%E6%8B%9F%E7%8E%AF%E5%A2%83%E4%B8%AD%E5%AE%89%E8%A3%85GCC-G"><span class="post-toc-text">4 如果项目对gcc版本有要求，在虚拟环境中安装GCC&#x2F;G++</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#5-%E5%AE%89%E8%A3%85-torch"><span class="post-toc-text">5 安装 torch</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#6-%E5%AE%89%E8%A3%85%E5%85%B6%E4%BB%96%E4%BE%9D%E8%B5%96%E5%BA%93"><span class="post-toc-text">6 安装其他依赖库</span></a></li></ol></li></ol>
+                <ol class="post-toc"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#%E5%AE%89%E8%A3%85%E7%B3%BB%E7%BB%9F%E7%BA%A7%E4%BE%9D%E8%B5%96%E5%88%B0usr-bin%E4%B8%8B"><span class="post-toc-text">安装系统级依赖到usr&#x2F;bin下</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#%E5%AE%89%E8%A3%85miniconda%E5%88%B0%E7%94%A8%E6%88%B7%E6%96%87%E4%BB%B6%E5%A4%B9home-user-name%E4%B8%8B"><span class="post-toc-text">安装miniconda到用户文件夹home&#x2F;user_name下</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#%E5%88%9B%E5%BB%BA%E8%99%9A%E6%8B%9F%E7%8E%AF%E5%A2%83%E5%B9%B6%E5%AE%89%E8%A3%85%E6%89%80%E9%9C%80pkg"><span class="post-toc-text">创建虚拟环境并安装所需pkg</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#%E5%88%9B%E5%BB%BA%E5%B9%B6%E8%BF%9B%E5%85%A5%E8%99%9A%E6%8B%9F%E7%8E%AF%E5%A2%83"><span class="post-toc-text">创建并进入虚拟环境</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#%E5%A6%82%E6%9E%9C%E9%A1%B9%E7%9B%AE%E5%AF%B9cmake%E7%89%88%E6%9C%AC%E6%9C%89%E8%A6%81%E6%B1%82%EF%BC%8C%E5%9C%A8%E8%99%9A%E6%8B%9F%E7%8E%AF%E5%A2%83%E4%B8%AD%E5%AE%89%E8%A3%85cmake"><span class="post-toc-text">如果项目对cmake版本有要求，在虚拟环境中安装cmake</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#%E5%A6%82%E6%9E%9C%E9%A1%B9%E7%9B%AE%E5%AF%B9cuda%E7%89%88%E6%9C%AC%E6%9C%89%E8%A6%81%E6%B1%82%EF%BC%8C%E5%9C%A8%E8%99%9A%E6%8B%9F%E7%8E%AF%E5%A2%83%E4%B8%AD%E5%AE%89%E8%A3%85CUDA"><span class="post-toc-text">如果项目对cuda版本有要求，在虚拟环境中安装CUDA</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#%E5%A6%82%E6%9E%9C%E9%A1%B9%E7%9B%AE%E5%AF%B9gcc%E7%89%88%E6%9C%AC%E6%9C%89%E8%A6%81%E6%B1%82%EF%BC%8C%E5%9C%A8%E8%99%9A%E6%8B%9F%E7%8E%AF%E5%A2%83%E4%B8%AD%E5%AE%89%E8%A3%85GCC-G"><span class="post-toc-text">如果项目对gcc版本有要求，在虚拟环境中安装GCC&#x2F;G++</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#%E5%AE%89%E8%A3%85-torch"><span class="post-toc-text">安装 torch</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#%E5%AE%89%E8%A3%85%E5%85%B6%E4%BB%96%E4%BE%9D%E8%B5%96%E5%BA%93"><span class="post-toc-text">安装其他依赖库</span></a></li></ol></li></ol>
             
         
-        <div class=".article-gallery"><h4 id="一、安装系统级依赖到usr-bin下"><a href="#一、安装系统级依赖到usr-bin下" class="headerlink" title="一、安装系统级依赖到usr/bin下"></a>一、安装系统级依赖到<code>usr/bin</code>下</h4><p>这一步最大的麻烦在于，我们可能是普通用户，是没有root权限的，导致一些系统级别的依赖无法安装。（之前本人硬着头皮试过把这些依赖安装到自己目录下，但是很遗憾..都没成功），如果有这个需求，最省事的就是直接联系服务器管理员进行操作。</p>
-<h4 id="二、安装miniconda到用户文件夹home-user-name下"><a href="#二、安装miniconda到用户文件夹home-user-name下" class="headerlink" title="二、安装miniconda到用户文件夹home/user_name下"></a>二、安装miniconda到用户文件夹<code>home/user_name</code>下</h4><p>安装 miniconda3 到 <code>/home/user_name/miniconda3</code></p>
+        <div class=".article-gallery"><h4 id="安装系统级依赖到usr-bin下"><a href="#安装系统级依赖到usr-bin下" class="headerlink" title="安装系统级依赖到usr/bin下"></a>安装系统级依赖到<code>usr/bin</code>下</h4><p>这一步最大的麻烦在于，我们可能是普通用户，是没有root权限的，导致一些系统级别的依赖无法安装。（之前本人硬着头皮试过把这些依赖安装到自己目录下，但是很遗憾..都没成功），如果有这个需求，最省事的就是直接联系服务器管理员进行操作。</p>
+<h4 id="安装miniconda到用户文件夹home-user-name下"><a href="#安装miniconda到用户文件夹home-user-name下" class="headerlink" title="安装miniconda到用户文件夹home/user_name下"></a>安装miniconda到用户文件夹<code>home/user_name</code>下</h4><p>安装 miniconda3 到 <code>/home/user_name/miniconda3</code></p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">env_scripts/install_miniconda.sh</span><br></pre></td></tr></table></figure>
 <p>这个脚本的内容如下：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#!/bin/bash</span></span><br><span class="line"><span class="comment"># 下载 miniconda installer (x86-64) 没有vpn可以换镜像源</span></span><br><span class="line"><span class="built_in">echo</span> <span class="string">&quot;Downloading Miniconda installer...&quot;</span></span><br><span class="line">wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh</span><br><span class="line"><span class="built_in">chmod</span> +x Miniconda3-latest-Linux-x86_64.sh</span><br><span class="line"></span><br><span class="line"><span class="comment"># 安装 miniconda 到 指定路径</span></span><br><span class="line"><span class="built_in">echo</span> <span class="string">&quot;Installing Miniconda...&quot;</span></span><br><span class="line">bash Miniconda3-latest-Linux-x86_64.sh -p /home/user_name/miniconda3</span><br><span class="line"></span><br><span class="line"><span class="comment"># 添加 miniconda 到 PATH</span></span><br><span class="line"><span class="built_in">echo</span> <span class="string">&quot;Adding Miniconda to PATH...&quot;</span></span><br><span class="line"><span class="built_in">echo</span> <span class="string">&#x27;export PATH=&quot;/home/user_name/miniconda3/bin:$PATH&quot;&#x27;</span> &gt;&gt; ~/.bashrc</span><br><span class="line"><span class="comment"># 更新 PATH</span></span><br><span class="line"><span class="built_in">source</span> ~/.bashrc</span><br><span class="line"></span><br><span class="line"><span class="comment"># # 删除 installer</span></span><br><span class="line"><span class="comment"># rm Miniconda3-latest-Linux-x86_64.sh</span></span><br></pre></td></tr></table></figure>
 
-<h4 id="三、创建虚拟环境并安装所需pkg"><a href="#三、创建虚拟环境并安装所需pkg" class="headerlink" title="三、创建虚拟环境并安装所需pkg"></a>三、创建虚拟环境并安装所需pkg</h4><h5 id="1-创建并进入虚拟环境"><a href="#1-创建并进入虚拟环境" class="headerlink" title="1 创建并进入虚拟环境"></a>1 创建并进入虚拟环境</h5><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">conda create -n xxx python=3.12 -y</span><br><span class="line">conda activate xxx</span><br></pre></td></tr></table></figure>
-<h5 id="2-如果项目对cmake版本有要求，在虚拟环境中安装cmake"><a href="#2-如果项目对cmake版本有要求，在虚拟环境中安装cmake" class="headerlink" title="2 如果项目对cmake版本有要求，在虚拟环境中安装cmake"></a>2 如果项目对<code>cmake</code>版本有要求，在虚拟环境中安装cmake</h5><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">conda install -c conda-forge cmake=3.22.1</span><br></pre></td></tr></table></figure>
+<h4 id="创建虚拟环境并安装所需pkg"><a href="#创建虚拟环境并安装所需pkg" class="headerlink" title="创建虚拟环境并安装所需pkg"></a>创建虚拟环境并安装所需pkg</h4><h5 id="创建并进入虚拟环境"><a href="#创建并进入虚拟环境" class="headerlink" title="创建并进入虚拟环境"></a>创建并进入虚拟环境</h5><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">conda create -n xxx python=3.12 -y</span><br><span class="line">conda activate xxx</span><br></pre></td></tr></table></figure>
+<h5 id="如果项目对cmake版本有要求，在虚拟环境中安装cmake"><a href="#如果项目对cmake版本有要求，在虚拟环境中安装cmake" class="headerlink" title="如果项目对cmake版本有要求，在虚拟环境中安装cmake"></a>如果项目对<code>cmake</code>版本有要求，在虚拟环境中安装cmake</h5><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">conda install -c conda-forge cmake=3.22.1</span><br></pre></td></tr></table></figure>
 <p>检查是否安装成功</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">(env_name) user_name@sever_name:~$ which cmake</span><br><span class="line">/home/user_name/miniconda3/envs/env_name/bin/cmake</span><br></pre></td></tr></table></figure>
-<h5 id="3-如果项目对cuda版本有要求，在虚拟环境中安装CUDA"><a href="#3-如果项目对cuda版本有要求，在虚拟环境中安装CUDA" class="headerlink" title="3 如果项目对cuda版本有要求，在虚拟环境中安装CUDA"></a>3 如果项目对<code>cuda</code>版本有要求，在虚拟环境中安装CUDA</h5><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">conda install -c nvidia/label/cuda-11.8.0 cuda</span><br></pre></td></tr></table></figure>
+<h5 id="如果项目对cuda版本有要求，在虚拟环境中安装CUDA"><a href="#如果项目对cuda版本有要求，在虚拟环境中安装CUDA" class="headerlink" title="如果项目对cuda版本有要求，在虚拟环境中安装CUDA"></a>如果项目对<code>cuda</code>版本有要求，在虚拟环境中安装CUDA</h5><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">conda install -c nvidia/label/cuda-11.8.0 cuda</span><br></pre></td></tr></table></figure>
 <p>检查是否安装成功</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">(env_name) user_name@sever_name:~$ which nvcc</span><br><span class="line">/home/user_name/miniconda3/envs/env_name/bin/nvcc</span><br></pre></td></tr></table></figure>
 
-<h5 id="4-如果项目对gcc版本有要求，在虚拟环境中安装GCC-G"><a href="#4-如果项目对gcc版本有要求，在虚拟环境中安装GCC-G" class="headerlink" title="4 如果项目对gcc版本有要求，在虚拟环境中安装GCC&#x2F;G++"></a>4 如果项目对<code>gcc</code>版本有要求，在虚拟环境中安装GCC&#x2F;G++</h5><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">conda install -c conda-forge gcc_linux-64=11.4.0 gxx_linux-64=11.4.0</span><br></pre></td></tr></table></figure>
+<h5 id="如果项目对gcc版本有要求，在虚拟环境中安装GCC-G"><a href="#如果项目对gcc版本有要求，在虚拟环境中安装GCC-G" class="headerlink" title="如果项目对gcc版本有要求，在虚拟环境中安装GCC&#x2F;G++"></a>如果项目对<code>gcc</code>版本有要求，在虚拟环境中安装GCC&#x2F;G++</h5><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">conda install -c conda-forge gcc_linux-64=11.4.0 gxx_linux-64=11.4.0</span><br></pre></td></tr></table></figure>
 <ul>
 <li>注意：Conda 默认不会将这些工具链包中的 gcc 映射为 gcc 命令。所以 <code>which gcc</code> 仍然返回的是 <code>/usr/bin/gcc</code>（系统默认的 gcc）</li>
 </ul>
@@ -253,8 +270,8 @@
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ln -sf $(which x86_64-conda-linux-gnu-gcc) $CONDA_PREFIX/bin/gcc</span><br><span class="line">ln -sf $(which x86_64-conda-linux-gnu-g++) $CONDA_PREFIX/bin/g++</span><br></pre></td></tr></table></figure>
 <p>检查是否成功</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">(env_name) user_name@sever_name:~$ which gcc</span><br><span class="line">/home/user_name/miniconda3/envs/env_name/bin/gcc</span><br></pre></td></tr></table></figure>
-<h5 id="5-安装-torch"><a href="#5-安装-torch" class="headerlink" title="5 安装 torch"></a>5 安装 <code>torch</code></h5><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install torch==2.3.0 torchvision==0.18.0 torchaudio==2.3.0 --index-url https://download.pytorch.org/whl/cu118 </span><br></pre></td></tr></table></figure>
-<h5 id="6-安装其他依赖库"><a href="#6-安装其他依赖库" class="headerlink" title="6 安装其他依赖库"></a>6 安装其他依赖库</h5><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install -r requirements.txt</span><br></pre></td></tr></table></figure></div>
+<h5 id="安装-torch"><a href="#安装-torch" class="headerlink" title="安装 torch"></a>安装 <code>torch</code></h5><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install torch==2.3.0 torchvision==0.18.0 torchaudio==2.3.0 --index-url https://download.pytorch.org/whl/cu118 </span><br></pre></td></tr></table></figure>
+<h5 id="安装其他依赖库"><a href="#安装其他依赖库" class="headerlink" title="安装其他依赖库"></a>安装其他依赖库</h5><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install -r requirements.txt</span><br></pre></td></tr></table></figure></div>
     </div>
 
     <div class="post-meta">
@@ -290,7 +307,7 @@
                 
 
                 
-                    <span class="post-footer-pre-next-last-span-right">下一篇：<a href="/2023/12/10/%5B%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E7%B3%BB%E5%88%97%5D%20%E5%88%9D%E5%AD%A6%E8%80%85%E5%B8%B8%E4%BC%9A%E9%81%87%E5%88%B0%E7%9A%84%E9%97%AE%E9%A2%98/">深度学习系列 - 初学者常会遇到的问题</a>
+                    <span class="post-footer-pre-next-last-span-right">下一篇：<a href="/2024/04/11/%5B%E4%B8%80%E5%8A%B3%E6%B0%B8%E9%85%8D%E7%B3%BB%E5%88%97%5Dtinycudann%E7%BC%96%E8%AF%91%E9%97%AE%E9%A2%98%E5%8F%8A/">一劳永配系列 - tinycudann的编译问题</a>
                     </span>
                 
             </div>
